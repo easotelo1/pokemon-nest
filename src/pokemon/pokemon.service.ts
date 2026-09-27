@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { pokemon } from './interfaces/pokemon.interface';
 import { HttpClient } from '@nestjs/http-client';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class PokemonService {
@@ -19,7 +20,9 @@ export class PokemonService {
                 name: data.name,
                 type: data.types[0].type.name,
                 level: 1,
-                dexNum: data.id
+                dexNum: data.id,
+                hasTrainer: false,
+                uniqueId: uuidv4()
             };
             this.pokemon.push(newPokemon);
         }
