@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { CreateTrainerDto } from './dto/create-trainer.dto';
+import { CreateTrainerDto, CreateTrainerSchema } from './dto/create-trainer.dto';
 import { TrainersService } from './trainers.service';
 import { trainers } from './interfaces/trainers.interface';
 
@@ -8,7 +8,7 @@ export class TrainersController {
     constructor(private readonly trainersService: TrainersService) {}
 
     @Post() 
-    create(@Body() createTrainerDto: CreateTrainerDto) {
+    create(@Body({ schema: CreateTrainerSchema }) createTrainerDto: CreateTrainerDto) {
         this.trainersService.create(createTrainerDto);
     }
 
