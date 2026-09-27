@@ -41,7 +41,7 @@ $ npm run test:cov
 
 // Takes in a JSON Body with a name and a sex (Male or Female)
 {
-    "name": string
+    "name": string,
     "sex": string
 }
 
@@ -52,6 +52,28 @@ sex - male | female
 
 ```
 [GET] /trainers
-
-// Retrieves a list of all trainers
 ```
+ Retrieves a list of all trainers
+
+```
+[GET] /pokemon
+```
+
+Retrieves a list of all current pokemon in application. Because theres over a thousand pokemon, it is initialized to empty list. You must first find a SPECIFIC pokemon in the following request for it to be added to the list
+
+``` 
+[GET] /pokemon/:name
+
+// Instantiates a new simplified pokemon with the following data 
+
+{
+    "name": string,
+    "type": string,
+    "level": number,
+    "dexNum": number
+}
+
+
+```
+
+Call interacts with PokeAPI - an unofficial RESTFul API linked to an extensive database of pokemon. If pokemon does not exist in PokeAPI, returns 404. duplicates are allowed (contrary to trainers).
