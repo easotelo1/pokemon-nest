@@ -47,6 +47,8 @@ $ npm run test:cov
 
 ```
 
+name - unique, case insensitive. Will throw 409 (Conflict Exception) if name already registered
+sex - male | female
 
 ```
 [GET] /trainers
