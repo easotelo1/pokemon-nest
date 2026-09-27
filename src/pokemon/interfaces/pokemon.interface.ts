@@ -3,4 +3,6 @@ export interface pokemon {
     type: string;
     level: number;
     dexNum: number;
+    hasTrainer: boolean;
+    uniqueId: string;
 }

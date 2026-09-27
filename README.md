@@ -70,7 +70,9 @@ Retrieves a list of all current pokemon in application. Because theres over a th
     "name": string,
     "type": string,
     "level": number,
-    "dexNum": number
+    "dexNum": number,
+    "hasTrainer": boolean,    // defaults to false
+    "uniqueId": string,       // uniqueId to differentiate between duplicate pokemons
 }
 
 
