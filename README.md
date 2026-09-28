@@ -36,6 +36,7 @@ $ npm run test:cov
 
 ## Resource Lists
 
+##### [POST] /trainers
 ```
 [POST] /trainers
 
@@ -50,16 +51,41 @@ $ npm run test:cov
 name - unique, case insensitive. Will throw 409 (Conflict Exception) if name already registered
 sex - male | female
 
+Sample Response:
+```json
+{
+  "name": "bao",
+  "sex": "female",
+  "id": 2,
+  "pokemon": []
+}
+```
+
+##### [GET] /trainers
+
 ```
 [GET] /trainers
 ```
  Retrieves a list of all trainers
 
-```
-[GET] /pokemon
-```
-
-Retrieves a list of all current pokemon in application. Because theres over a thousand pokemon, it is initialized to empty list. You must first find a SPECIFIC pokemon in the following request for it to be added to the list
+ Same Response: 
+ ```json
+ [
+  {
+    "name": "everett",
+    "sex": "male",
+    "id": 1,
+    "pokemon": []
+  },
+  {
+    "name": "bao",
+    "sex": "female",
+    "id": 2,
+    "pokemon": []
+  }
+]
+ ```
+##### [GET] /pokemon/:name
 
 ``` 
 [GET] /pokemon/:name
@@ -79,3 +105,105 @@ Retrieves a list of all current pokemon in application. Because theres over a th
 ```
 
 Call interacts with PokeAPI - an unofficial RESTFul API linked to an extensive database of pokemon. If pokemon does not exist in PokeAPI, returns 404. duplicates are allowed (contrary to trainers).
+
+Sample Response: 
+```json
+{
+  "name": "cyndaquil",
+  "type": "fire",
+  "level": 1,
+  "dexNum": 155,
+  "hasTrainer": false,
+  "uniqueId": "062ce607-9089-42df-b9cc-0a1e105301e6"
+}
+```
+
+##### [GET] /pokemon
+
+```
+[GET] /pokemon
+```
+
+Retrieves a list of all current pokemon in application. Because theres over a thousand pokemon, it is initialized to empty list. You must first find a SPECIFIC pokemon in the following request for it to be added to the list
+
+Sample Response:
+```json
+[
+  {
+    "name": "pichu",
+    "type": "electric",
+    "level": 1,
+    "dexNum": 172,
+    "hasTrainer": false,
+    "uniqueId": "0c64bb05-6bc8-4ae9-b1b1-ff8954042616"
+  },
+  {
+    "name": "cyndaquil",
+    "type": "fire",
+    "level": 1,
+    "dexNum": 155,
+    "hasTrainer": false,
+    "uniqueId": "062ce607-9089-42df-b9cc-0a1e105301e6"
+  }
+]
+```
+
+##### [POST] /trainers/add-pokemon
+
+```
+[POST] /trainers/add-pokemon
+```
+
+Adds an existing pokemon instantiated via [GET] /pokemon/:name request to an existing trainer instantiated via [POST] /trainers.
+
+Required Query Parameters - 
+
+**trainerName**: string
+**pokemonName**: string
+
+Sample Response
+```json
+{
+  "name": "everett",
+  "sex": "male",
+  "id": 1,
+  "pokemon": [
+    {
+      "name": "pichu",
+      "type": "electric",
+      "level": 1,
+      "dexNum": 172,
+      "hasTrainer": true,
+      "uniqueId": "0c64bb05-6bc8-4ae9-b1b1-ff8954042616"
+    }
+  ]
+}
+```
+
+Will throw 404 (NotFoundException) if trainerName or pokemonName do not exist in app memory.
+Will throw 409 (ConflictException) if pokemon is already assigned to a trainer
+
+##### [POST] /trainers/remove-pokemon
+
+```
+[POST] /trainers/remove-pokemon
+```
+
+Remove an existing pokemon that a trainer is carrying around.
+
+Required Query Parameters - 
+
+**trainerName**: string
+**pokemonName**: string
+
+Sample Response
+```json
+{
+  "name": "everett",
+  "sex": "male",
+  "id": 1,
+  "pokemon": [] // direct result of removing the pokemon added in the previous request.
+}
+```
+
+Will throw 404 (NotFoundException) if trainerName or pokemonName do not exist in app memory.

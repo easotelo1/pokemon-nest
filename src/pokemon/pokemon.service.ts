@@ -13,7 +13,7 @@ export class PokemonService {
         return this.pokemon
     }
 
-    async findOne(name: string): Promise<any> {
+    async findOne(name: string): Promise<pokemon> {
         try {
             const { data } = await this.http.get<any>(`/pokemon/${name}`);
             const newPokemon = {
@@ -25,9 +25,18 @@ export class PokemonService {
                 uniqueId: uuidv4()
             };
             this.pokemon.push(newPokemon);
+            return newPokemon;
         }
         catch (error) {
             throw new NotFoundException(`Pokemon "${name}" not found`);
         }
+    }
+
+    getPokemonFromList(name: string): pokemon {
+        const foundPokemon = this.pokemon.find(pokemon => pokemon.name === name && !pokemon.hasTrainer);
+        if (!foundPokemon) {
+            throw new NotFoundException(`${name} not found in encountered pokemon list.`);
+        }
+        return foundPokemon;
     }
 }
