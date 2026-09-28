@@ -1,6 +1,17 @@
 ## Description
 
-A simple Nestjs app to practice the framework. Can create trainers and pokemons and have them interact with each other. This app uses the official v2 of [PokeAPI](https://pokeapi.co/docs/v2#genders) when dealing with Pokemon. Trainers are custom made.
+A simple Nestjs app to practice and learn the framework. Can create trainers and pokemons and have them interact with each other. This app uses the official v2 of [PokeAPI](https://pokeapi.co/docs/v2#genders) when dealing with Pokemon. Trainers are custom made.
+
+## Topics Covered
+
+- Creating a new nestjs project via CLI
+- Creating multiple Modules/Providers/Controllers and injecting them where needed
+- Creating simple GET requests
+- Creating GET request and having the service make external API Call using @nestjs/http-client
+- Creating POST requests that need a body
+- Creating POST requests that require query parameters
+- Requests Exception Handling
+- Validation Pipes using Zod on incoming DTOs
 
 ## Project setup
 
@@ -16,9 +27,6 @@ $ npm run start
 
 # watch mode
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
 ## Run tests
