@@ -12,6 +12,7 @@ A simple Nestjs app to practice and learn the framework. Can create trainers and
 - Creating POST requests that require query parameters
 - Requests Exception Handling
 - Validation Pipes using Zod on incoming DTOs
+- Unit testing with JEST on all service and controllers
 
 ## Project setup
 
